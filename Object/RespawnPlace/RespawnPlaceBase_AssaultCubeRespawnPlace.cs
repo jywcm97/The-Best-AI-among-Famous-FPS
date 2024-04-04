@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RespawnPlaceBase_Q3ARespawnPlace : ObjectBase_RespawnPlaceBase
+public class RespawnPlaceBase_AssaultCubeRespawnPlace : ObjectBase_RespawnPlaceBase
 {
     protected override void Awake()
     {
         base.Awake();
-        mPlaceOwner = new AIBase_Xonotic();
+        mPlaceOwner = new AIBase_AssaultCube();
     }
 }
