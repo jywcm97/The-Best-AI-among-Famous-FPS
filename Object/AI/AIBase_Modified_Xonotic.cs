@@ -68,18 +68,18 @@ public class AIBase_Modified_Xonotic : ObjectBase_AIBase
             {
                 if (Vector3.Distance(this.gameObject.transform.position, GameManager.mAll_Of_Game_Objects[mClosestTeammate].transform.position) > 10) //멀면 팀원에게 이동
                 {
-                    moveTo(mClosestTeammate, false, 3);
+                    moveTo(mClosestTeammate, false, 4);
                 }
                 else //모였으면
                 {
                     if (mClosestOccupy != -1)//점령전이면
                     {
-                        moveTo(mClosestOccupy, false, 4);
+                        moveTo(mClosestOccupy, false, 5);
 
                     }
                     else if (mClosestEnemy != -1)  //데스매치면
                     {
-                        moveTo(mClosestEnemy, false, 5);
+                        moveTo(mClosestEnemy, false, 6);
                     }
                 }
             }
@@ -87,12 +87,12 @@ public class AIBase_Modified_Xonotic : ObjectBase_AIBase
             {
                 if (mClosestOccupy != -1)//점령전이면
                 {
-                    moveTo(mClosestOccupy, false, 4);
+                    moveTo(mClosestOccupy, false, 7);
 
                 }
                 else if (mClosestEnemy != -1)  //데스매치면
                 {
-                    moveTo(mClosestEnemy, false, 5);
+                    moveTo(mClosestEnemy, false, 8);
                 }
             }
 
