@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class GameDataSaver
@@ -18,17 +19,21 @@ public class GameDataSaver
         // 파일에 데이터 추가
         File.AppendAllText(filePath, data);
     }
-    public static void SaveOccupyResultsToCSV(int pCSPoint, int pOWPoint, int pXonoticPoint, int pQ3APoint)
+    public static void SaveOccupyResultsToCSV(params (string GameName, int Score)[] gameScores)
     {
-
         string fileName = $"Occupy_{programStartTime}.csv";
-
         string filePath = Application.dataPath + "/" + fileName;
 
-        // 파일에 저장할 문자열 생성
-        string data = $"{"CS"}{","}{pCSPoint}{","}{"OW"}{","}{pOWPoint}{","}{"Xonotic"}{","}{pXonoticPoint}{","}{"Q3A"}{","}{pQ3APoint}{","}{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}\n";
+        StringBuilder dataBuilder = new StringBuilder();
 
-        // 파일에 데이터 추가
-        File.AppendAllText(filePath, data);
+        foreach (var gameScore in gameScores)
+        {
+            dataBuilder.Append($"{gameScore.GameName},{gameScore.Score},");
+        }
+
+        dataBuilder.Append($"{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}\n");
+
+        File.AppendAllText(filePath, dataBuilder.ToString());
     }
+
 }

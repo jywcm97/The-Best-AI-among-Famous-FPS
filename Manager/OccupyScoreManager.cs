@@ -78,7 +78,13 @@ public class OccupyScoreManager : MonoBehaviour
         if(mDataSaveCount > 20)
         {
             mDataSaveCount = 0.0f;
-            GameDataSaver.SaveOccupyResultsToCSV((int)teamScores[typeof(AIBase_CS)], (int)teamScores[typeof(AIBase_OW)], (int)teamScores[typeof(AIBase_AssaultCube)], (int)teamScores[typeof(AIBase_Xonotic)]);
+            GameDataSaver.SaveOccupyResultsToCSV(("CS", (int)teamScores[typeof(AIBase_CS)]),
+                ("OW", (int)teamScores[typeof(AIBase_OW)]),
+                ("AssaultCube", (int)teamScores[typeof(AIBase_AssaultCube)]),
+                ("Xonotic", (int)teamScores[typeof(AIBase_Xonotic)]),
+                ("Modified_AssaultCube", (int)teamScores[typeof(AIBase_Modified_AssaultCube)]),
+                ("Modified_Xonotic", (int)teamScores[typeof(AIBase_Modified_Xonotic)])
+                );
         }
 
 
