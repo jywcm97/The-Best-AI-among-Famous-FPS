@@ -34,73 +34,71 @@ public class AIBase_Modified_AssaultCube : ObjectBase_AIBase
         mClosestTeammate = searchItemNumber(mID, GameData.SearchType.Closest, GameData.ObjectType.AI, GameData.TeamType.Teammate);
 
 
-        //°ø°İ
-        if (mVisibleEnemy != -1) // ÀûÀÌ º¸ÀÌ¸é
+        //ê³µê²©
+        if (mVisibleEnemy != -1) // ì ì´ ë³´ì´ë©´
         {
-            mLastEnemy = mVisibleEnemy; // ¸¶ÁÖÄ£ ÀûÀ¸·Î µî·Ï
+            mLastEnemy = mVisibleEnemy; // ë§ˆì£¼ì¹œ ì ìœ¼ë¡œ ë“±ë¡
             shoot(mLastEnemy);
 
         }
 
-        //¿òÁ÷ÀÓ
-        if (getHpPercentage() < 0.5 || getAmmoPercentage() < 0.5) //»óÅÂ°¡ ÁÁÁö ¾Ê´Ù "ÇÊ¿äÇÑ ¾ÆÀÌÅÛ Å½»ö"
+        //ì›€ì§ì„
+        if (getHpPercentage() < 0.5 || getAmmoPercentage() < 0.5) //ìƒíƒœê°€ ì¢‹ì§€ ì•Šë‹¤ "í•„ìš”í•œ ì•„ì´í…œ íƒìƒ‰"
         {
-            if (getHpPercentage() <= getAmmoPercentage() && mClosestHeal != -1) //Ã¼·ÂÀÌ ´õ ºÎÁ·
+            if (getHpPercentage() <= getAmmoPercentage() && mClosestHeal != -1) //ì²´ë ¥ì´ ë” ë¶€ì¡±
             {
-                if (mVisibleEnemy != -1) moveTo(mSafestHeal, true, 0); //ÀûÀÌ º¸ÀÏ ¶© ¹İµå½Ã ¾ÈÀüÇÑ ÈúÆÑÀ¸·Î
-                else moveTo(mClosestHeal, false, 1); // Ã¼·Â ¾ÆÀÌÅÛÀ¸·Î ÀÌµ¿
+                moveTo(mClosestHeal, false, 0); // ê°€ê¹Œìš´ ì²´ë ¥ ì•„ì´í…œìœ¼ë¡œ ì´ë™
 
             }
-            else if (getHpPercentage() > getAmmoPercentage() && mClosestAmmo != -1) //ÃÑ¾ËÀÌ ´õ ºÎÁ·
+            else if (getHpPercentage() > getAmmoPercentage() && mClosestAmmo != -1) //ì´ì•Œì´ ë” ë¶€ì¡±
             {
-                if (mVisibleEnemy != -1) moveTo(mSafestAmmo, true, 2); //ÀûÀÌ º¸ÀÏ ¶© ¹İµå½Ã ¾ÈÀüÇÑ ÃÑ¾Ë·Î
-                else moveTo(mClosestAmmo, false, 3); // ÃÑ¾Ë ¾ÆÀÌÅÛÀ¸·Î ÀÌµ¿
+                moveTo(mClosestAmmo, false, 1); // ê°€ê¹Œìš´ ì´ì•Œ ì•„ì´í…œìœ¼ë¡œ ì´ë™
             }
-            else //»óÅÂ°¡ ÁÁÁö ¾ÊÁö¸¸ ¾ÆÀÌÅÛÀÌ Á¸ÀçÇÏÁö ¾ÊÀ» ¶§
+            else //ìƒíƒœê°€ ì¢‹ì§€ ì•Šì§€ë§Œ ì•„ì´í…œì´ ì¡´ì¬í•˜ì§€ ì•Šì„ ë•Œ
             {
                 //Stop
             }
         }
-        else //»óÅÂ°¡ ±¦ÂúÀ» ¶§
+        else //ìƒíƒœê°€ ê´œì°®ì„ ë•Œ
         {
 
-            if (mClosestTeammate != -1)  //ÆÀ¿øÀÌ Á¸ÀçÇÏ¸é
+            if (mClosestTeammate != -1)  //íŒ€ì›ì´ ì¡´ì¬í•˜ë©´
             {
-                if (Vector3.Distance(this.gameObject.transform.position, GameManager.mAll_Of_Game_Objects[mClosestTeammate].transform.position) > 10) //¸Ö¸é ÆÀ¿ø¿¡°Ô ÀÌµ¿
+                if (Vector3.Distance(this.gameObject.transform.position, GameManager.mAll_Of_Game_Objects[mClosestTeammate].transform.position) > 10) //ë©€ë©´ íŒ€ì›ì—ê²Œ ì´ë™
                 {
-                    moveTo(mClosestTeammate, false, 4);
+                    moveTo(mClosestTeammate, false, 2);
                 }
-                else //¸ğ¿´À¸¸é
+                else //ëª¨ì˜€ìœ¼ë©´
                 {
-                    if (mClosestOccupy != -1)//Á¡·ÉÀüÀÌ¸é
+                    if (mClosestOccupy != -1)//ì ë ¹ì „ì´ë©´
                     {
-                        moveTo(mClosestOccupy, false, 5);
+                        moveTo(mClosestOccupy, false, 3);
 
                     }
-                    else //µ¥½º¸ÅÄ¡¸é
+                    else //ë°ìŠ¤ë§¤ì¹˜ë©´
                     {
-                        if (mLastEnemy != -1) //¸¶Áö¸·À¸·Î ¸¸³­ Àû±º¿¡°Ô ÀÌµ¿
+                        if (mLastEnemy != -1) //ë§ˆì§€ë§‰ìœ¼ë¡œ ë§Œë‚œ ì êµ°ì—ê²Œ ì´ë™
                         {
-                            moveTo(mLastEnemy, false, 6);
+                            moveTo(mLastEnemy, false, 4);
                         }
                         else if (mClosestEnemy != -1)
                         {
-                            moveTo(mClosestEnemy, false, 7);
+                            moveTo(mClosestEnemy, false, 5);
 
                         }
                     }
                 }
             }
-            else //ÆÀ¿øÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é
+            else //íŒ€ì›ì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´
             {
-                if (mClosestOccupy != -1)//Á¡·ÉÀüÀÌ¸é
+                if (mClosestOccupy != -1)//ì ë ¹ì „ì´ë©´
                 {
                     moveTo(mClosestOccupy, false, 8);
 
                 }
-                else //µ¥½º¸ÅÄ¡¸é
+                else //ë°ìŠ¤ë§¤ì¹˜ë©´
                 {
-                    if (mLastEnemy != -1) //¸¶Áö¸·À¸·Î ¸¸³­ Àû±º¿¡°Ô ÀÌµ¿
+                    if (mLastEnemy != -1) //ë§ˆì§€ë§‰ìœ¼ë¡œ ë§Œë‚œ ì êµ°ì—ê²Œ ì´ë™
                     {
                         moveTo(mLastEnemy, false, 9);
                     }
@@ -119,21 +117,21 @@ public class AIBase_Modified_AssaultCube : ObjectBase_AIBase
 
 
 
-        if (mLastEnemy != -1 && !GameManager.mAll_Of_Game_Objects[mLastEnemy].activeSelf) mLastEnemy = -1; //µî·ÏÇÑ Á×¾ú´Ù¸é ÃÊ±âÈ­
+        if (mLastEnemy != -1 && !GameManager.mAll_Of_Game_Objects[mLastEnemy].activeSelf) mLastEnemy = -1; //ë“±ë¡í•œ ì£½ì—ˆë‹¤ë©´ ì´ˆê¸°í™”
     }
 
 
     public override void respawn()
     {
-        base.respawn(); // ±âÁ¸ respawn¼öÇà
-        mLastEnemy = -1; // ³»°¡ Á×¾úÀ¸¸é »ó´ë ÃÊ±âÈ­
+        base.respawn(); // ê¸°ì¡´ respawnìˆ˜í–‰
+        mLastEnemy = -1; // ë‚´ê°€ ì£½ì—ˆìœ¼ë©´ ìƒëŒ€ ì´ˆê¸°í™”
 
     }
 
     public override void killed(int pDeadAIsID)
     {
         base.killed(pDeadAIsID);
-        if(pDeadAIsID == mLastEnemy) mLastEnemy = -1; //ÂÑ´ø »ó´ë¸¦ Á×¿´À¸¸é »ó´ë ÃÊ±âÈ­
+        if(pDeadAIsID == mLastEnemy) mLastEnemy = -1; //ì«“ë˜ ìƒëŒ€ë¥¼ ì£½ì˜€ìœ¼ë©´ ìƒëŒ€ ì´ˆê¸°í™”
     }
 
 }

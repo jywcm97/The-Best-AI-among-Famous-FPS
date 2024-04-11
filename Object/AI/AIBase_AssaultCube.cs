@@ -45,14 +45,12 @@ public class AIBase_AssaultCube : ObjectBase_AIBase
         {
             if (getHpPercentage() <= getAmmoPercentage() && mClosestHeal != -1) //체력이 더 부족
             {
-                if (mVisibleEnemy != -1) moveTo(mSafestHeal, true, 0); //적이 보일 땐 반드시 안전한 힐팩으로
-                else moveTo(mClosestHeal, false, 1); // 체력 아이템으로 이동
+                moveTo(mClosestHeal, false, 0); // 가까운 체력 아이템으로 이동
 
             }
             else if (getHpPercentage() > getAmmoPercentage() && mClosestAmmo != -1) //총알이 더 부족
             {
-                if (mVisibleEnemy != -1) moveTo(mSafestAmmo, true, 2); //적이 보일 땐 반드시 안전한 총알로
-                else moveTo(mClosestAmmo, false, 3); // 총알 아이템으로 이동
+                moveTo(mClosestAmmo, false, 1); // 가까운 총알 아이템으로 이동
             }
             else //상태가 좋지 않지만 아이템이 존재하지 않을 때
             {
@@ -65,18 +63,18 @@ public class AIBase_AssaultCube : ObjectBase_AIBase
 
             if (mClosestOccupy != -1)//점령전이면
             {
-                moveTo(mClosestOccupy, false, 4);
+                moveTo(mClosestOccupy, false, 2);
 
             }
             else //데스매치면
             {
                 if (mLastEnemy != -1) //마지막으로 만난 적군에게 이동
                 {
-                    moveTo(mLastEnemy, false, 5);
+                    moveTo(mLastEnemy, false, 3);
                 }
                 else if (mClosestEnemy != -1)
                 {
-                    moveTo(mClosestEnemy, false, 6);
+                    moveTo(mClosestEnemy, false, 4);
 
                 }
             }
